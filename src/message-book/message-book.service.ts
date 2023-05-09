@@ -9,12 +9,17 @@ export class MessageBookService {
   constructor(
     @InjectRepository(MessageBook)
     private MessageBookRepository: Repository<MessageBook>,
-  ) {}
+  ) { }
+  
   create(createMessageBookDto: CreateMessageBookDto) {
-    return 'This action adds a new messageBook';
+    const data = new MessageBook()
+    data.content = createMessageBookDto.content
+    data.likes = createMessageBookDto.likes
+    data.userId = createMessageBookDto.userId
+    return this.MessageBookRepository.save(data)
   }
 
-  findAll() :Promise<MessageBook[] | null >{
+  findAll(): Promise<MessageBook[] | null> {
     return this.MessageBookRepository.find()
   }
 

@@ -9,6 +9,7 @@ export class MessageBookController {
 
   @Post()
   create(@Body() createMessageBookDto: CreateMessageBookDto) {
+    console.log(createMessageBookDto);
     return this.messageBookService.create(createMessageBookDto);
   }
 

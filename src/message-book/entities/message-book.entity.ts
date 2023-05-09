@@ -8,12 +8,12 @@ export class MessageBook {
     @PrimaryGeneratedColumn()
     messageId: number
     //普通列
-    @Column()
+    @Column({default:0})
     userId: number
-    @Column()
+    @Column({default:' '})
     content: string
     @CreateDateColumn({type:'timestamp'})
     posttime: Date
-    @Column()
+    @Column({default:0})
     likes: number
 }
