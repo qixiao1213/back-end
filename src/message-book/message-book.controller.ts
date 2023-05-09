@@ -3,18 +3,19 @@ import { MessageBookService } from './message-book.service';
 import { CreateMessageBookDto } from './dto/create-message-book.dto';
 import { UpdateMessageBookDto } from './dto/update-message-book.dto';
 
-@Controller('message-book')
+@Controller('/message-book')
 export class MessageBookController {
   constructor(private readonly messageBookService: MessageBookService) {}
 
-  @Post()
+  @Post('/post')
   create(@Body() createMessageBookDto: CreateMessageBookDto) {
     console.log(createMessageBookDto);
     return this.messageBookService.create(createMessageBookDto);
   }
 
-  @Get()
+  @Get('/getall')
   findAll() {
+    console.log('!!!')
     return this.messageBookService.findAll();
   }
 
