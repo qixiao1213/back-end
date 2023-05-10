@@ -15,7 +15,6 @@ export class MessageBookController {
 
   @Get('/getall')
   findAll() {
-    console.log('!!!')
     return this.messageBookService.findAll();
   }
 
@@ -29,8 +28,8 @@ export class MessageBookController {
     return this.messageBookService.update(+id, updateMessageBookDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.messageBookService.remove(+id);
+  @Delete()
+  clear() {
+    return this.messageBookService.remove();
   }
 }

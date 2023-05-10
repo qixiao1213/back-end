@@ -31,7 +31,7 @@ export class MessageBookService {
     return `This action updates a #${id} messageBook`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} messageBook`;
+  remove() {
+    return  this.MessageBookRepository.clear();
   }
 }
