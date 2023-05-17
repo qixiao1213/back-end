@@ -1,7 +1,7 @@
 export class CreateMessageBookDto {
     messageId:number
     likes:number
-    userId:number
+    email:string
     posttime:Date
     content:string
 }

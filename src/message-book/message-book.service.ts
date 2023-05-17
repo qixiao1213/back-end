@@ -3,19 +3,19 @@ import { CreateMessageBookDto } from './dto/create-message-book.dto';
 import { UpdateMessageBookDto } from './dto/update-message-book.dto';
 import { MessageBook } from './entities/message-book.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Like } from 'typeorm';
 @Injectable()
 export class MessageBookService {
   constructor(
-    @InjectRepository(MessageBook)
+    @InjectRepository(MessageBook)                  
     private MessageBookRepository: Repository<MessageBook>,
   ) { }
-  
+
   create(createMessageBookDto: CreateMessageBookDto) {
     const data = new MessageBook()
     data.content = createMessageBookDto.content
     data.likes = createMessageBookDto.likes
-    data.userId = createMessageBookDto.userId
+    data.email = createMessageBookDto.email
     return this.MessageBookRepository.save(data)
   }
 
@@ -23,15 +23,15 @@ export class MessageBookService {
     return this.MessageBookRepository.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} messageBook`;
-  }
-
-  update(id: number, updateMessageBookDto: UpdateMessageBookDto) {
-    return `This action updates a #${id} messageBook`;
+  search(query: { keyWord: string }) {
+    return this.MessageBookRepository.find({
+      where: {
+        content: Like(`%${query.keyWord}%`)
+      }
+    })
   }
 
   remove() {
-    return  this.MessageBookRepository.clear();
+    return this.MessageBookRepository.clear();
   }
 }

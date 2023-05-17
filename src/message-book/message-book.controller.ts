@@ -1,11 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { MessageBookService } from './message-book.service';
 import { CreateMessageBookDto } from './dto/create-message-book.dto';
 import { UpdateMessageBookDto } from './dto/update-message-book.dto';
+import { query } from 'express';
 
 @Controller('/message-book')
 export class MessageBookController {
-  constructor(private readonly messageBookService: MessageBookService) {}
+  constructor(private readonly messageBookService: MessageBookService) { }
 
   @Post('/post')
   create(@Body() createMessageBookDto: CreateMessageBookDto) {
@@ -17,15 +18,11 @@ export class MessageBookController {
     return this.messageBookService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.messageBookService.findOne(+id);
+  @Get('/search')
+  Search(@Query() query: { keyWord: string }) {
+    return this.messageBookService.search(query);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMessageBookDto: UpdateMessageBookDto) {
-    return this.messageBookService.update(+id, updateMessageBookDto);
-  }
 
   @Delete()
   clear() {

@@ -8,8 +8,8 @@ export class MessageBook {
     @PrimaryGeneratedColumn()
     messageId: number
     //普通列
-    @Column({default:0})
-    userId: number
+    @Column({default:''})
+    email: string
     @Column({default:' '})
     content: string
     @CreateDateColumn({type:'timestamp'})
