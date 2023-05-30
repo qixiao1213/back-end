@@ -7,4 +7,6 @@ export class User {
     userId:number
     @Column()
     email:string
+    @Column({default:false})
+    isBan: boolean
 }

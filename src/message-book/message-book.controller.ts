@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { MessageBookService } from './message-book.service';
 import { CreateMessageBookDto } from './dto/create-message-book.dto';
 import { UpdateMessageBookDto } from './dto/update-message-book.dto';
-import { query } from 'express';
 
 @Controller('/message-book')
 export class MessageBookController {
@@ -27,5 +26,10 @@ export class MessageBookController {
   @Delete()
   clear() {
     return this.messageBookService.remove();
+  }
+
+  @Delete(':id')
+  RemoveOne(@Param('id') id: number) {
+    return this.messageBookService.RemoveOne(+id);
   }
 }

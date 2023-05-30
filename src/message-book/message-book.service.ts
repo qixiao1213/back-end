@@ -34,4 +34,8 @@ export class MessageBookService {
   remove() {
     return this.MessageBookRepository.clear();
   }
+
+  RemoveOne(id:number) {
+    return this.MessageBookRepository.delete(id)
+  }
 }

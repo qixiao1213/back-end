@@ -16,4 +16,6 @@ export class MessageBook {
     posttime: Date
     @Column({default:0})
     likes: number
+    @Column({default:''})
+    reply: string
 }

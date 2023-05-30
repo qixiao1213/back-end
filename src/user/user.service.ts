@@ -4,7 +4,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { log } from 'console';
 @Injectable()
 export class UserService {
   constructor(
@@ -27,7 +26,7 @@ export class UserService {
     })
   }
 
-  findAll() {
+  findAll() :Promise<User[] | null> {
     return this.UserRepository.find()
   }
 
@@ -35,11 +34,11 @@ export class UserService {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  update(updateUserDto: UpdateUserDto){
+    return this.UserRepository.update(updateUserDto.userId,updateUserDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    return this.UserRepository.delete(id)
   }
 }
