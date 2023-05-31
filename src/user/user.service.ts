@@ -23,6 +23,11 @@ export class UserService {
         console.log(user)
         this.UserRepository.save(user)
       }
+      else {
+        if(createUserDto.isBan == true){
+          return 'baned!';
+        }
+      }
     })
   }
 
